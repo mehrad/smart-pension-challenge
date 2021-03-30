@@ -1,15 +1,28 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Main parser class to run our job
-class Parser
-  attr_accessor :log_path
+require './services/parser_service'
+require_relative './services/args_reader_service'
+require_relative './services/file_service'
+require_relative './services/storage_service'
+require_relative './services/exception_service'
+require_relative './services/printer_service'
 
-  def initialize(args)
-    @log_path = args
-  end
+if $PROGRAM_NAME == __FILE__
 
-  def run; end
+  args_reader = ArgsReaderService.new(ARGV)
 
-  # Use Ruby constants to make the file runnable from the command line
-  Parser.new(ARGV).run if $PROGRAM_NAME == __FILE__
+  ExceptionService.throw_exception(args_reader.errors) unless args_reader.valid?
+
+  parser_service = ParserService.new(
+    parse_path: args_reader.path,
+    file_service: FileService.new,
+    storage: StorageService.new,
+    printer: PrinterService.new
+  )
+
+  ExceptionService.throw_exception(parser_service.errors) unless parser_service.valid?
+
+  parser_service.run
+
 end
