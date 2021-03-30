@@ -2,9 +2,6 @@
 
 require 'spec_helper'
 require './parser'
-require '../services/args_reader_service.rb'
-require '../services/exception_service.rb'
-require '../services/parser_service.rb'
 
 # This test wroks as an intergarion test
 describe 'parser' do
