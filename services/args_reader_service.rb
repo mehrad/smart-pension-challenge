@@ -10,6 +10,10 @@ class ArgsReaderService
     fetch_path(args)
   end
 
+  def valid?
+    errors.size.zero?
+  end
+
   private
 
   def fetch_path(args)

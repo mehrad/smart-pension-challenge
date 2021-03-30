@@ -13,7 +13,7 @@ describe ArgsReaderService do
     end
 
     it 'returns no error' do
-      expect(subject.errors.size).to be_zero
+      expect(subject.valid?).to be true
     end
   end
   context 'with two args' do
@@ -24,7 +24,7 @@ describe ArgsReaderService do
     end
 
     it 'returns errors' do
-      expect(subject.errors.first).not_to be_nil
+      expect(subject.valid?).to be false
     end
   end
   context 'with no args' do
@@ -35,7 +35,7 @@ describe ArgsReaderService do
     end
 
     it 'returns errors' do
-      expect(subject.errors.first).not_to be_nil
+      expect(subject.valid?).to be false
     end
   end
 end
