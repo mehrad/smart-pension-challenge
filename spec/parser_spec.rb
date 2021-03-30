@@ -2,6 +2,9 @@
 
 require 'spec_helper'
 require './parser'
+require '../services/args_reader_service.rb'
+require '../services/exception_service.rb'
+require '../services/parser_service.rb'
 
 # This test wroks as an intergarion test
 describe 'parser' do
@@ -33,7 +36,7 @@ describe 'parser' do
     let(:arguments) { ['bad_path'] }
 
     it 'errors' do
-      expect { subject }.to output.to_stderr_from_any_process
+      expect { subject }.to output("File does not exist at [bad_path]\n").to_stderr_from_any_process
     end
   end
 

@@ -19,7 +19,7 @@ describe ParserService do
   end
 
   context '#run' do
-    it 'send messages to storage' do
+    before do
       allow(file_service).to receive(:fetch)
       allow(file_service).to receive(:errors).and_return([])
       allow(file_service).to receive(:fetch_data)
@@ -27,6 +27,14 @@ describe ParserService do
         .and_yield('/page', '127.0.0.1')
         .and_yield('/page', '127.0.0.1')
 
+      allow(printer).to receive(:print_unique_visit_count)
+      allow(printer).to receive(:print_visit_count)
+
+      allow(storage).to receive(:<<).twice
+      allow(storage).to receive(:visit_count).and_return([['/page', 2]])
+      allow(storage).to receive(:unique_visit_count).and_return([['/page', 2]])
+    end
+    it 'sends messages to storage' do
       expect(printer).to receive(:print_unique_visit_count)
       expect(printer).to receive(:print_visit_count)
 
@@ -34,6 +42,15 @@ describe ParserService do
       expect(storage).to receive(:visit_count).and_return([['/page', 2]])
       expect(storage).to receive(:unique_visit_count).and_return([['/page', 2]])
       subject.run
+    end
+    it 'sends messages to printer' do
+      expect(printer).to receive(:print_unique_visit_count)
+      expect(printer).to receive(:print_visit_count)
+      subject.run
+    end
+
+    it 'reutrns valid' do
+      expect(subject.valid?).to be true
     end
   end
 end
