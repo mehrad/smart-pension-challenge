@@ -13,4 +13,6 @@ AllCops:
   NewCops: enable
 
 Metrics/BlockLength:
-  Max: 30
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
