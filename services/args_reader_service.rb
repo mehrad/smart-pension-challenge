@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Args fetcher wich looks for first arguments to exists
-# It validates args to have exactly on arguments
+# Args service reader wich looks for first args
+# Validates args to have exactly on arguments
 class ArgsReaderService
   attr_reader :errors, :path
 
