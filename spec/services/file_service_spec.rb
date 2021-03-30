@@ -4,10 +4,11 @@ require 'spec_helper'
 require_relative '../../services/file_service'
 
 describe FileService do
-  subject { described_class.new(path) }
+  subject { described_class.new }
+  before { subject.fetch_data(path) }
+
   context 'with proper file' do
     let(:path) { 'spec/fixtures/sample_webserver.log' }
-
     it 'yields splited line' do
       expect { |l| subject.each_line(&l) }.to yield_successive_args(
         ['/about/2', '444.701.448.104'],
@@ -36,6 +37,7 @@ describe FileService do
     let(:path) { 'spec/fixtures/empty_webserver.log' }
 
     it 'returns error' do
+      subject
       expect(subject.errors.first).to eq('Log is empty at spec/fixtures/empty_webserver.log')
     end
   end
@@ -44,6 +46,7 @@ describe FileService do
     let(:path) { 'spec/fixtures/dont_exist.log' }
 
     it 'returns error' do
+      subject
       expect(subject.errors.first).to eq('File does not exist at spec/fixtures/dont_exist.log')
     end
   end

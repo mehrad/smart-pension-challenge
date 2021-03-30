@@ -5,8 +5,11 @@
 class FileService
   attr_reader :errors, :file_handle
 
-  def initialize(path)
+  def initialize
     @errors = []
+  end
+
+  def fetch_data(path)
     unless File.exist?(path)
       @errors << "File does not exist at #{path}"
       return
