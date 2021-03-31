@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
+require_relative '../lib/error_pronable'
 # Args service reader wich looks for first args
 # Validates args to have exactly on arguments
 class ArgsReaderService
-  attr_reader :errors, :path
+  include ErrorPronable
+  attr_reader :path
 
   def initialize(args)
     @errors = []
     fetch_path(args)
-  end
-
-  def valid?
-    errors.size.zero?
   end
 
   private

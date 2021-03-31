@@ -21,6 +21,7 @@ describe ParserService do
   context '#run' do
     before do
       allow(file_service).to receive(:errors).and_return([])
+      allow(file_service).to receive(:valid?)
       allow(file_service).to receive(:fetch_data)
       allow(file_service).to receive(:each_line)
         .and_yield('/page', '127.0.0.1')
@@ -35,6 +36,7 @@ describe ParserService do
     end
     it 'sends messages to file service' do
       expect(file_service).to receive(:errors).and_return([])
+      expect(file_service).to receive(:valid?)
       expect(file_service).to receive(:fetch_data)
       expect(file_service).to receive(:each_line)
         .and_yield('/page', '127.0.0.1')

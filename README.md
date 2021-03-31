@@ -18,7 +18,7 @@ cd smart-pension-challenge
 ruby -v
 ```
 
-The output should start with something like `ruby 2.7.2` as this is the version which i used in this project.
+The output should start with something like `ruby 2.7.2` as this is the version which I used in this project.
 
 If not, install the right ruby version using [rbenv](https://github.com/rbenv/rbenv) (it could take a while):
 
@@ -45,7 +45,7 @@ now You can simply run this command and get the appropriate result.
 If you want you can run Rspec to generate coverage or use rubocop.
 
 rubocop supposed to be installed via the afformentioned  `bundle` command but if by anychance it is not a case for you
-please install rubocop manually like this `gem install rubocop`; howeveer, i won't recommend it.
+please install rubocop manually like this `gem install rubocop`; however, I won't recommend it.
 
 ```shell
 bundle exec rspec
@@ -53,7 +53,7 @@ bundle exec rubocop
 ```
 
 Test coverage as simpleCov gem reports 
-`254 relevant lines, 249 lines covered and 5 lines missed. ( 98.03% )`
+`269 relevant lines, 264 lines covered and 5 lines missed. ( 98.14% )`
 
 
 ## Architecture
@@ -63,7 +63,7 @@ I suppose nothing can describe the architecture of this app more than an illustr
 
 ![alt text](https://github.com/mehrad/smart-pension-challenge/blob/main/diagram.png?raw=true)                                              
 
-As you can see what i had in my mind was to decouple each service and inject them into parser service. with this method we can easily replace any of them in the future; for instance, we can change File service to AWS file service. 
+As you can see what I had in my mind was to decouple each service and inject them into parser service. with this method we can easily replace any of them in the future; for instance, we can change File service to AWS file service. 
 ## Next steps
 
 

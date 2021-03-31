@@ -3,7 +3,7 @@
 # File reader service which returns iteratable object containing page and ip
 # Morever handles empty, corrupted or bad path
 class FileService
-  attr_reader :errors, :file_handle
+  include ErrorPronable
 
   def initialize
     @errors = []
@@ -31,6 +31,8 @@ class FileService
   end
 
   private
+
+  attr_reader :file_handle
 
   def proper_ip?(ip)
     !ip.nil? && ip.match(/^([0-9]+(\.|$)){4}/)

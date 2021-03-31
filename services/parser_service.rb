@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require_relative '../lib/error_pronable'
 # Main parser class to run our job
 class ParserService
-  attr_reader :errors
+  include ErrorPronable
 
   def initialize(parse_path:, file_service:, storage:, printer:)
     @errors = []
@@ -11,17 +12,13 @@ class ParserService
     @printer = printer
 
     @file_service.fetch_data(parse_path)
-    @errors = file_service.errors
+    @errors = file_service.errors unless file_service.valid?
   end
 
   def run
     populate_storage(file_service)
     printer.print_visit_count(storage.visit_count)
     printer.print_unique_visit_count(storage.unique_visit_count)
-  end
-
-  def valid?
-    errors.size.zero?
   end
 
   private

@@ -18,8 +18,8 @@ describe FileService do
       )
     end
 
-    it 'returns no error' do
-      expect(subject.errors).to eq([])
+    it 'is valid' do
+      expect(subject.valid?).to be true
     end
   end
   context 'with corrupted file' do
@@ -29,6 +29,8 @@ describe FileService do
       expect { |l| subject.each_line(&l) }.to yield_successive_args(
         ['/home', '184.123.665.067']
       )
+
+      expect(subject.valid?).to be false
       expect(subject.errors.first).to eq('Log is corrupted at 0')
     end
   end
@@ -38,6 +40,7 @@ describe FileService do
 
     it 'returns error' do
       subject
+      expect(subject.valid?).to be false
       expect(subject.errors.first).to eq('Log is empty at spec/fixtures/empty_webserver.log')
     end
   end
@@ -47,6 +50,7 @@ describe FileService do
 
     it 'returns error' do
       subject
+      expect(subject.valid?).to be false
       expect(subject.errors.first).to eq('File does not exist at spec/fixtures/dont_exist.log')
     end
   end
