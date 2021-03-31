@@ -26,7 +26,7 @@ class ParserService
 
   private
 
-  attr_reader :path, :storage, :file_service, :printer
+  attr_reader :storage, :file_service, :printer
 
   def populate_storage(file_service)
     file_service.each_line do |page, ip|
