@@ -38,14 +38,18 @@ bundle
 now You can simply run this command and get the appropriate result.
 
 ```shell
-	$./parser.rb fixtures/webserver.log
+./parser.rb logs/webserver.log
 ```
 
 ### Test and Rubocop
-If you want you can run Rspec to generate coverage or use rubocop 
+If you want you can run Rspec to generate coverage or use rubocop.
+
+rubocop supposed to be installed via the afformentioned  `bundle` command but if by anychance it is not a case for you
+please install rubocop manually like this `gem install rubocop`; howeveer, i won't recommend it.
+
 ```shell
-	bundle exec rspec
-    bundle exec rubocop
+bundle exec rspec
+bundle exec rubocop
 ```
 
 Test coverage as simpleCov gem reports 
@@ -54,43 +58,10 @@ Test coverage as simpleCov gem reports
 
 ## Architecture
 
-I think nothing can describe what this app do more than an illustration of it
+I suppose nothing can describe the architecture of this app more than an illustration of it
 
 
- +--------------+           +--------------------+                                               
- |              |  get path |                    |                                               
- |    Parser    ------------- Args Reader Service|                                               
- |              |           |                    |                                               
- +-------|------+           +--------------------+                                               
-         |                                                                                       
-         |                                                                                       
-         |  send                                                                                 
-         |  path                                                                                 
-         |  Inject                                                                               
-         |  Storage                                                                              
-         |  FileService                                                                          
-         |  Printer                                                                              
-         |                                                                                       
-         |                                                                                       
-         |                                                                                       
- +-------|-------+                 +----------------+                                            
- |               | get file handle |                |                                            
- | Parser Serive -------------------  File Service  |                                            
- |               | with each line  |                |                                            
- +-------|-------+                 +----------------+                                            
-         |  \----                                                                                
-         |       \----                                                                           
-         |            \-----       +----------------+                                            
-         |          populate ----  |                |                                            
-         |        by page and ip \--   Storage      |                                            
-         |                         |                |                                            
-         |                         +----------------+                                            
-         |                                                                                       
-         |     print visit count   +----------------+                                            
-         |     and unique view     |                |                                            
-         |--------------------------    Printer     |                                            
-                                   |                |                                            
-                                   +----------------+                                               
+![alt text](https://github.com/mehrad/smart-pension-challenge/blob/main/diagram.png?raw=true)                                              
 
 As you can see what i had in my mind was to decouple each service and inject them into parser service. with this method we can easily replace any of them in the future; for instance, we can change File service to AWS file service. 
 ## Next steps
