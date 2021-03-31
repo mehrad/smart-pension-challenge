@@ -40,6 +40,17 @@ now You can simply run this command and get the appropriate result.
 ```shell
 ./parser.rb logs/webserver.log
 ```
+you probably will get a permission denied message as below:
+
+```shell
+permission denied: ./parser.rb
+``` 
+
+don't worry, you can set permission and make it executable and then run the first script again:
+
+```shell
+sudo chmod 755 ./parser.rb
+```
 
 ### Test and Rubocop
 If you want you can run Rspec to generate coverage or use rubocop.
